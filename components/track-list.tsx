@@ -5,6 +5,8 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { PlayCircle, DownloadCloud } from "lucide-react"
 import { useToast } from "./ui/use-toast"
+import { useAudio } from "@/lib/audio-context"
+
 type Track = {
   id: string
   title: string
@@ -15,6 +17,7 @@ type Track = {
 export function TrackList() {
   const [tracks, setTracks] = useState<Track[]>([])
   const { toast } = useToast()
+  const { playTrack } = useAudio()
 
   useEffect(() => {
     fetch("/api/tracks")
@@ -23,8 +26,25 @@ export function TrackList() {
   }, [])
 
   const handlePlay = (track: Track) => {
-    // Implement your playback logic here tafseer
-    console.log("Play track:", track)
+    console.log("=== PLAY BUTTON CLICKED ===")
+    console.log("Track:", track)
+    console.log("File path:", track.filePath)
+    console.log("Full URL:", window.location.origin + track.filePath)
+    
+    // Test if file is accessible
+    fetch(track.filePath)
+      .then(response => {
+        console.log("File fetch response:", response.status, response.statusText)
+        if (!response.ok) {
+          console.error("File not accessible:", response.status)
+        }
+      })
+      .catch(error => {
+        console.error("File fetch error:", error)
+      })
+    
+    playTrack(track)
+    console.log("playTrack called")
   }
 
   const handleDownload = async (track: Track) => {
@@ -93,4 +113,3 @@ export function TrackList() {
     </div>
   )
 }
-
