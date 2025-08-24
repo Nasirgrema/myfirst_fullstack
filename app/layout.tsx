@@ -7,8 +7,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Web tafseer Store",
-  description: "A simple web Tafseer store with playback features",
+  title: "Sheikh Dr. Buna Nasir - Islamic Media Library",
+  description: "Official digital library of Sheikh Dr. Buna Nasir featuring authentic Islamic teachings, Tafseer, and spiritual guidance in audio and video formats",
 }
 
 export default function RootLayout({
