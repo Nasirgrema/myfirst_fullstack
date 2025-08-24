@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Home, Upload, User } from "lucide-react"
+import { Home, Upload, User, Video, Search } from "lucide-react"
 import { motion } from "framer-motion"
 
 export function Navigation() {
@@ -14,32 +14,35 @@ export function Navigation() {
     <motion.nav 
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 border-b border-emerald-200/20 bg-gradient-to-r from-emerald-50/95 via-white/95 to-amber-50/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60 dark:from-slate-900/95 dark:via-slate-800/95 dark:to-emerald-900/95"
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="sticky top-0 z-50 glass-card border-b border-white/20 dark:border-white/10"
     >
       <div className="container flex items-center justify-between py-4">
         {/* Logo */}
-        <Link href="/" className="group flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-lg group-hover:shadow-emerald-500/25 transition-all duration-300">
-            <span className="text-lg font-bold">📖</span>
+        <Link href="/" className="group flex items-center space-x-4">
+          <div className="relative">
+            <div className="gradient-primary flex h-12 w-12 items-center justify-center rounded-2xl text-white shadow-lg group-hover:shadow-xl transition-all duration-300 hover-lift animate-glow">
+              <span className="text-xl font-bold">🎬</span>
+            </div>
+            <div className="absolute -inset-1 gradient-primary rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity duration-300"></div>
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-amber-600 bg-clip-text text-transparent">
-              Tafseer Store
+            <span className="text-2xl font-bold text-gradient-primary">
+              MediaVault
             </span>
-            <span className="text-xs text-muted-foreground">Islamic Audio Library</span>
+            <span className="text-sm text-muted-foreground font-medium">Audio & Video Library</span>
           </div>
         </Link>
 
         {/* Navigation Links */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3">
           <Link href="/" passHref>
             <Button 
               variant={pathname === "/" ? "default" : "ghost"}
-              className={`group relative overflow-hidden ${
+              className={`group relative overflow-hidden transition-all duration-300 rounded-xl hover-lift ${
                 pathname === "/" 
-                  ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg hover:shadow-emerald-500/25" 
-                  : "hover:bg-emerald-50 dark:hover:bg-emerald-900/20"
+                  ? "gradient-primary text-white shadow-lg" 
+                  : "hover:bg-primary/10 dark:hover:bg-primary/20"
               }`}
             >
               <Home className="mr-2 h-4 w-4" />
@@ -50,24 +53,52 @@ export function Navigation() {
           <Link href="/upload" passHref>
             <Button 
               variant={pathname === "/upload" ? "default" : "ghost"}
-              className={`group relative overflow-hidden ${
+              className={`group relative overflow-hidden transition-all duration-300 rounded-xl hover-lift ${
                 pathname === "/upload" 
-                  ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg hover:shadow-amber-500/25" 
-                  : "hover:bg-amber-50 dark:hover:bg-amber-900/20"
+                  ? "gradient-warm text-white shadow-lg" 
+                  : "hover:bg-amber-500/10 dark:hover:bg-amber-500/20"
               }`}
             >
               <Upload className="mr-2 h-4 w-4" />
-              Upload
+              Upload Audio
+            </Button>
+          </Link>
+
+          <Link href="/search" passHref>
+            <Button 
+              variant={pathname === "/search" ? "default" : "ghost"}
+              className={`group relative overflow-hidden transition-all duration-300 rounded-xl hover-lift ${
+                pathname === "/search" 
+                  ? "gradient-secondary text-white shadow-lg" 
+                  : "hover:bg-cyan-500/10 dark:hover:bg-cyan-500/20"
+              }`}
+            >
+              <Search className="mr-2 h-4 w-4" />
+              Smart Search
+            </Button>
+          </Link>
+
+          <Link href="/videos" passHref>
+            <Button 
+              variant={pathname === "/videos" || pathname.startsWith("/videos") ? "default" : "ghost"}
+              className={`group relative overflow-hidden transition-all duration-300 rounded-xl hover-lift ${
+                pathname === "/videos" || pathname.startsWith("/videos")
+                  ? "gradient-accent text-white shadow-lg" 
+                  : "hover:bg-purple-500/10 dark:hover:bg-purple-500/20"
+              }`}
+            >
+              <Video className="mr-2 h-4 w-4" />
+              Videos
             </Button>
           </Link>
 
           <Link href="/profile" passHref>
             <Button 
               variant={pathname === "/profile" ? "default" : "ghost"}
-              className={`group relative overflow-hidden ${
+              className={`group relative overflow-hidden transition-all duration-300 rounded-xl hover-lift ${
                 pathname === "/profile" 
-                  ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg hover:shadow-blue-500/25" 
-                  : "hover:bg-blue-50 dark:hover:bg-blue-900/20"
+                  ? "gradient-secondary text-white shadow-lg" 
+                  : "hover:bg-cyan-500/10 dark:hover:bg-cyan-500/20"
               }`}
             >
               <User className="mr-2 h-4 w-4" />
@@ -75,7 +106,7 @@ export function Navigation() {
             </Button>
           </Link>
 
-          <div className="ml-4 pl-4 border-l border-emerald-200/30">
+          <div className="ml-6 pl-6 border-l border-white/20 dark:border-white/10">
             <ModeToggle />
           </div>
         </div>
