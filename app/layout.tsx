@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Sheikh Dr. Buna Nasir - Islamic Media Library",
+  title: "منظومة التلاميذ - Manzumatut talamizi",
   description: "Official digital library of Sheikh Dr. Buna Nasir featuring authentic Islamic teachings, Tafseer, and spiritual guidance in audio and video formats",
 }
 
